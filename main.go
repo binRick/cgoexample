@@ -1,9 +1,3 @@
-//
-// main.go
-// Copyright (C) 2019 Tim Hughes
-//
-// Distributed under terms of the MIT license.
-//
 package main
 
 /*
@@ -14,6 +8,7 @@ package main
 import "C"
 import (
 	"fmt"
+	"os"
 )
 
 type (
@@ -28,16 +23,16 @@ func (p *Person) LongName() string {
 	return C.GoString(p.long_name)
 }
 
-
 func GetPerson(name string, long_name string) *Person {
 	return (*Person)(C.get_person(C.CString(name), C.CString(long_name)))
 }
 
-
-func main(){
+func main() {
+	fmt.Fprintf(os.Stderr, "GO MAIN START\n")
 	var f *Person
 	f = GetPerson("tim", "tim hughes")
-	fmt.Printf("Hello Go world: My name is %s, %s.\n", C.GoString(f.name), C.GoString(f.long_name))
+	fmt.Printf("C BINDING>          Name: %s | Long Name %s | \n", C.GoString(f.name), C.GoString(f.long_name))
 
-	fmt.Printf("Hello Go world: My name is %s, %s.\n", f.Name(), f.LongName())
+	fmt.Printf("GO BINDING>         Name: %s | Long Name:  %s | \n", f.Name(), f.LongName())
+	fmt.Fprintf(os.Stderr, "GO MAIN END\n")
 }

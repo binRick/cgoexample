@@ -1,17 +1,11 @@
-/*
- * person.c
- * Copyright (C) 2019 Tim Hughes
- *
- * Distributed under terms of the MIT license.
- */
-
 #include <stdio.h>
 #include "person.h"
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
+    fprintf(stderr, "C MAIN START\n");
     APerson * of;
     of = get_person("tim", "tim hughes");
-    printf("Hello C world: My name is %s, %s.\n", of->name, of->long_name);
+    printf("GO BINDING>        Name: %s | Long Name: %s | \n", of->name, of->long_name);
+    fprintf(stderr, "C MAIN END\n");
     return 0;
 }
